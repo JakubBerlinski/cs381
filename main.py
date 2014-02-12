@@ -1,6 +1,6 @@
 import time
 from ent import Entity
-from vector import myVector
+from vector import MyVector
 
 def main():
 	entities = []
@@ -8,7 +8,7 @@ def main():
 		entities.append(Entity("Entity"+str(i), vel = MyVector(10,0.0,0.0)))
 	
 	oldTime = time.time() # time.clock() for windows
-	for i in range(2000)
+	for i in range(2000):
 		now = time.time()
 		dtime = now - oldTime
 		oldTime = now
