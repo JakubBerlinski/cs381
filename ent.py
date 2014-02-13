@@ -2,7 +2,8 @@ from vector import MyVector
 from physics import Physics
 
 class Entity:
-	def __init__(self, mesh = "", pos = MyVector(0,0,0), vel = MyVector(0,0,0), yaw = 0, aspectTypes = [], aspects = []):
+	def __init__(self, name, mesh = "", pos = MyVector(0,0,0), vel = MyVector(0,0,0), yaw = 0, aspectTypes = [], aspects = []):
+		self.name = name
 		self.pos = pos
 		self.vel = vel
 		self.mesh = mesh
@@ -11,4 +12,10 @@ class Entity:
 		self.aspects = aspects
 
 	def tick(self, time):
-		self.pos = self.pos + (self.vel * time)	
+		self.pos = self.pos + (self.vel * time)
+
+	def __str__(self):
+		posString = "{" + str(self.pos.a) + ", " + str(self.pos.b) + ", " + str(self.pos.c) + "}"
+		velString = "{" + str(self.vel.a) + ", " + str(self.vel.b) + ", " + str(self.vel.c) + "}"
+		retString = "Name:"+self.name+" Mesh:"+self.mesh+" Pos:"+posString+" Vel:"+velString+" Yaw:"+str(self.yaw)
+		return retString

@@ -9,7 +9,7 @@ def main():
 	
 	oldTime = time.time() # time.clock() for windows
 	for i in range(2000):
-		now = time.time()
+		now = time.time() # time.time() for linux
 		dtime = now - oldTime
 		oldTime = now
 		for ent in entities:
