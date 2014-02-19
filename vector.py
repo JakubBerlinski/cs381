@@ -14,7 +14,7 @@ class MyVector:
 		ret = myVector(vec1.a - vec2.a, vec1.b - vec2.b, vec1.c - vec2.c)
 		return ret
 
-	def scalarMultiply(self,vec, scalar):
+	def scalarMultiply(self, vec, scalar):
 		ret = myVector(vec.a * scalar, vec.b * scalar, vec.c * scalar)
 		return ret
 

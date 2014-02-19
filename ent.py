@@ -20,3 +20,4 @@ class Entity:
 		velString = "{" + str(self.vel.a) + ", " + str(self.vel.b) + ", " + str(self.vel.c) + "}"
 		retString = "Name:"+self.name+" Pos:"+posString+" Vel:"+velString+" Yaw:"+str(self.yaw)
 		return retString
+
