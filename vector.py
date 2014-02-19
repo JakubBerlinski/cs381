@@ -26,31 +26,15 @@ class MyVector:
 		return math.sqrt(self.a**2 + self.b**2 + self.c**2)
 
 	def __add__(self, other):
-		self.a = self.a+other.a
-		self.b = self.b+other.b
-		self.c = self.c+other.c
-		return self
+		return MyVector(self.a + other.a, self.b + other.b, self.c + other.c)
 
 	def __sub__(self, other):
-		self.a = self.a-other.a
-		self.b = self.b-other.b
-		self.c = self.c-other.c
-		return self
+		return MyVector(self.a - other.a, self.b - other.b, self.c - other.c)
 
 	def __mul__(self, other):
-		self.a = self.a*other
-		self.b = self.b*other
-		self.c = self.c*other
-		return self
-
-	def __rmul__(self, other):
-		self.a = self.a*other
-		self.b = self.b*other
-		self.c = self.c*other
-		return self
+		return MyVector(self.a * other, self.b * other, self.c * other)
 
 	def __div__(self, other):
-		self.a = self.a/other
-		self.b = self.b/other
-		self.c = self.c/other
-		return self
+		return MyVector(self.a / other.a, self.b / other.b, self.c / other.c)
+
+

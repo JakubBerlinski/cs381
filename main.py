@@ -1,4 +1,4 @@
-import time
+import sys, time
 from ent import Entity
 from vector import MyVector
 
@@ -7,9 +7,9 @@ def main():
 	for i in range(0,2):
 		entities.append(Entity("Entity"+str(i), vel = MyVector(10,0.0,0.0)))
 	
-	oldTime = time.time() # time.clock() for windows
+	oldTime = time.clock() if sys.platform == 'win32' else time.time()
 	for i in range(2000):
-		now = time.time() # time.time() for linux
+		now = time.clock() if sys.platform == 'win32' else time.time()
 		dtime = now - oldTime
 		oldTime = now
 		for ent in entities:

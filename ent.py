@@ -10,12 +10,13 @@ class Entity:
 		self.yaw = yaw
 		self.aspectTypes = aspectTypes 
 		self.aspects = aspects
+		self.physics = Physics(self)
 
 	def tick(self, time):
-		self.pos = self.pos + (self.vel * time)
+		self.physics.tick(time)
 
 	def __str__(self):
 		posString = "{" + str(self.pos.a) + ", " + str(self.pos.b) + ", " + str(self.pos.c) + "}"
 		velString = "{" + str(self.vel.a) + ", " + str(self.vel.b) + ", " + str(self.vel.c) + "}"
-		retString = "Name:"+self.name+" Mesh:"+self.mesh+" Pos:"+posString+" Vel:"+velString+" Yaw:"+str(self.yaw)
+		retString = "Name:"+self.name+" Pos:"+posString+" Vel:"+velString+" Yaw:"+str(self.yaw)
 		return retString
