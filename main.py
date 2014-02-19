@@ -14,7 +14,7 @@ def main():
 		oldTime = now
 		for ent in entities:
 			ent.tick(dtime)
-			print str(ent)
+			#print str(ent)
 
 if __name__ == '__main__':
 	main()
