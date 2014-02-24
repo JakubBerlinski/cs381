@@ -9,7 +9,7 @@ class TutorialApplication(sf.Application):
 		sceneManager.shadowTechnique = ogre.SHADOWTYPE_STENCIL_ADDITIVE
  
         # Setup a mesh object.
-		ent = sceneManager.createEntity('Ninja', 'ninja.mesh')
+		ent = sceneManager.createEntity('Cube', 'cube.mesh')
 		ent.castShadows = True
 		sceneManager.getRootSceneNode().createChildSceneNode().attachObject(ent)
  
@@ -22,8 +22,6 @@ class TutorialApplication(sf.Application):
 		sceneManager.getRootSceneNode().createChildSceneNode ().attachObject (ent)
 		ent.setMaterialName ('Examples/Rockwall')
 		ent.castShadows = False
-  
-
  
    def _createCamera (self):
 		self.camera =  self.sceneManager.createCamera ('PlayerCam')
