@@ -33,7 +33,7 @@ class ObjectFrameListener(sf.FrameListener):
         self.sceneManager = sceneManager
 
         self.rotate = 0.13
-        self.move = 250
+        self.move = 500
 
         self.entities = entities
         self.ogreEntities = ogreEntities
@@ -67,7 +67,10 @@ class ObjectFrameListener(sf.FrameListener):
         # Update the toggle timer.
         if self.toggle >= 0:
             self.toggle -= frameEvent.timeSinceLastFrame
+
+        return True
   
+    def _processUnbufferedKeyInput(self, frameEvent):
         # Move the camera using keyboard input.
         transVector = ogre.Vector3(0, 0, 0)
         # Move Forward.
@@ -90,12 +93,13 @@ class ObjectFrameListener(sf.FrameListener):
             transVector.y -= self.move
 
         # Move the cube using keyboard input.
-        if self.Keyboard.isKeyDown(OIS.KC_TAB):
-            self.ogreEntities[self.nodeNum].setMaterialName ('asdf')
+        if self.Keyboard.isKeyDown(OIS.KC_TAB) and self.toggle < 0:
+            self.toggle = 0.5
+            self.ogreEntities[self.nodeNum].setMaterialName('whitebox')
             self.nodeNum += 1
             if self.nodeNum == self.entities.__len__():
                 self.nodeNum = 0
-            self.ogreEntities[self.nodeNum].setMaterialName ('Examples/Rockwall')
+            self.ogreEntities[self.nodeNum].setMaterialName('Examples/Rockwall')
 
         if self.Keyboard.isKeyDown(OIS.KC_DOWN):
             self.entities[self.nodeNum].vel += ogre.Vector3(0.5,0,0)
@@ -141,7 +145,6 @@ class MovingApplication(sf.Application):
             self.ogreEntities.append(entity);
             node = sceneManager.getRootSceneNode().createChildSceneNode(i.name)
             node.attachObject(entity)
-            #entity.setMaterialName ('Examples/Rockwall')
 
         self.ogreEntities[0].setMaterialName ('Examples/Rockwall')
 
