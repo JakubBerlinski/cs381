@@ -23,7 +23,7 @@ class Physics:
         self.entity.pos = pos
 
 class ObjectFrameListener(sf.FrameListener):
-    def __init__(self, renderWindow, camera, sceneManager, entities):
+    def __init__(self, renderWindow, camera, sceneManager, entities, ogreEntities):
         sf.FrameListener.__init__(self, renderWindow, camera)
 
         self.toggle = 0
@@ -36,21 +36,20 @@ class ObjectFrameListener(sf.FrameListener):
         self.move = 250
 
         self.entities = entities
+        self.ogreEntities = ogreEntities
         self.oldTime = 0
         self.newTime = 0
+        self.nodeNum = 0
 
     def frameStarted(self, frameEvent):
-        node = self.sceneManager.getSceneNode("cube1")
         self.newTime = frameEvent.timeSinceLastFrame
         dt = self.newTime - self.oldTime * 10
-
-        self.entities[0].tick(dt)
-        node.setPosition(self.entities[0].pos)
-
-        print dt
+        for i in self.entities:
+            node = self.sceneManager.getSceneNode(i.name)
+            i.tick(dt)
+            node.setPosition(i.pos)
 
         self.oldTime = frameEvent.timeSinceLastFrame
-
 
         if(self.renderWindow.isClosed()):
             return False
@@ -91,26 +90,33 @@ class ObjectFrameListener(sf.FrameListener):
             transVector.y -= self.move
 
         # Move the cube using keyboard input.
+        if self.Keyboard.isKeyDown(OIS.KC_TAB):
+            self.ogreEntities[self.nodeNum].setMaterialName ('asdf')
+            self.nodeNum += 1
+            if self.nodeNum == self.entities.__len__():
+                self.nodeNum = 0
+            self.ogreEntities[self.nodeNum].setMaterialName ('Examples/Rockwall')
+
         if self.Keyboard.isKeyDown(OIS.KC_DOWN):
-            self.entities[0].vel += ogre.Vector3(0.5,0,0)
+            self.entities[self.nodeNum].vel += ogre.Vector3(0.5,0,0)
 
         if self.Keyboard.isKeyDown(OIS.KC_UP):
-            self.entities[0].vel += ogre.Vector3(-0.5,0,0)
+            self.entities[self.nodeNum].vel += ogre.Vector3(-0.5,0,0)
 
         if self.Keyboard.isKeyDown(OIS.KC_LEFT):
-            self.entities[0].vel += ogre.Vector3(0,0,0.5)
+            self.entities[self.nodeNum].vel += ogre.Vector3(0,0,0.5)
 
         if self.Keyboard.isKeyDown(OIS.KC_RIGHT):
-            self.entities[0].vel += ogre.Vector3(0,0,-0.5)
+            self.entities[self.nodeNum].vel += ogre.Vector3(0,0,-0.5)
 
         if self.Keyboard.isKeyDown(OIS.KC_PGDOWN):
-            self.entities[0].vel += ogre.Vector3(0,0.5,0)
+            self.entities[self.nodeNum].vel += ogre.Vector3(0,0.5,0)
 
         if self.Keyboard.isKeyDown(OIS.KC_PGUP):
-            self.entities[0].vel += ogre.Vector3(0,-0.5,0)
+            self.entities[self.nodeNum].vel += ogre.Vector3(0,-0.5,0)
 
         if self.Keyboard.isKeyDown(OIS.KC_SPACE):
-            self.entities[0].vel = ogre.Vector3(0,0,0)
+            self.entities[self.nodeNum].vel = ogre.Vector3(0,0,0)
  
         # Translate the camera based on time.
         self.camNode.translate(self.camNode.orientation * transVector * frameEvent.timeSinceLastFrame)
@@ -125,13 +131,19 @@ class MovingApplication(sf.Application):
         sceneManager.ambientLight = (1, 1, 1)
         surfaceHeight = 0
         self.entities = []
-        self.entities.append(Entity("cube1", mesh="Cube.mesh"))
+        self.ogreEntities = []
+        self.entities.append(Entity("cube1", mesh="Cube.mesh", vel=ogre.Vector3(0,0,0), pos=ogre.Vector3(0,100,0)))
+        self.entities.append(Entity("cube2", mesh="Cube.mesh", vel=ogre.Vector3(0,0,0), pos=ogre.Vector3(0,200,0)))
 
         # Setup a mesh entity and attach it to a scene node.
         for i in self.entities:
             entity = sceneManager.createEntity(i.name, i.mesh)
+            self.ogreEntities.append(entity);
             node = sceneManager.getRootSceneNode().createChildSceneNode(i.name)
             node.attachObject(entity)
+            #entity.setMaterialName ('Examples/Rockwall')
+
+        self.ogreEntities[0].setMaterialName ('Examples/Rockwall')
 
         # Setup a ground plane.
         plane = ogre.Plane ((0, 1, 0), 0)
@@ -160,7 +172,7 @@ class MovingApplication(sf.Application):
         self.camera.aspectRatio = float (viewport.actualWidth) / float (viewport.actualHeight)
 
     def _createFrameListener(self):
-        self.frameListener = ObjectFrameListener(self.renderWindow, self.camera, self.sceneManager, self.entities)
+        self.frameListener = ObjectFrameListener(self.renderWindow, self.camera, self.sceneManager, self.entities, self.ogreEntities)
         self.root.addFrameListener(self.frameListener)
         self.frameListener.showDebugOverlay(True)
 
