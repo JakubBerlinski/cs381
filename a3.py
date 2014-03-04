@@ -40,6 +40,7 @@ class ObjectFrameListener(sf.FrameListener):
         self.oldTime = 0
         self.newTime = 0
         self.nodeNum = 0
+        self.moveScale = 0.0
 
     def frameStarted(self, frameEvent):
         self.newTime = frameEvent.timeSinceLastFrame
@@ -60,6 +61,8 @@ class ObjectFrameListener(sf.FrameListener):
  
         # Get the current mouse state.
         currMouse = self.Mouse.getMouseState()
+
+        self.moveScale = self.move * frameEvent.timeSinceLastFrame
   
         # Update the mouseDown boolean.            
         self.mouseDown = currMouse.buttonDown(OIS.MB_Left)
@@ -74,17 +77,17 @@ class ObjectFrameListener(sf.FrameListener):
         # Move the camera using keyboard input.
         transVector = ogre.Vector3(0, 0, 0)
         # Move Forward.
-        if self.Keyboard.isKeyDown(OIS.KC_W):
-           transVector.z -= self.move
-        # Move Backward.
-        if self.Keyboard.isKeyDown(OIS.KC_S):
-            transVector.z += self.move
-        # Strafe Left.
         if self.Keyboard.isKeyDown(OIS.KC_A):
-            transVector.x -= self.move
-        # Strafe Right.
+            self.translateVector.x = -self.moveScale
+
         if self.Keyboard.isKeyDown(OIS.KC_D):
-           transVector.x += self.move
+            self.translateVector.x = self.moveScale
+
+        if self.Keyboard.isKeyDown(OIS.KC_W):
+            self.translateVector.z = -self.moveScale
+
+        if self.Keyboard.isKeyDown(OIS.KC_S):
+            self.translateVector.z = self.moveScale
         # Move Up.        
         if self.Keyboard.isKeyDown(OIS.KC_R):
             transVector.y += self.move
@@ -123,7 +126,8 @@ class ObjectFrameListener(sf.FrameListener):
             self.entities[self.nodeNum].vel = ogre.Vector3(0,0,0)
  
         # Translate the camera based on time.
-        self.camNode.translate(self.camNode.orientation * transVector * frameEvent.timeSinceLastFrame)
+        #self.camNode.translate(self.camNode.orientation * transVector * frameEvent.timeSinceLastFrame)
+        self.camera.moveRelative(translateVector)
  
         # If the escape key is pressed end the program.
         return not self.Keyboard.isKeyDown(OIS.KC_ESCAPE)
