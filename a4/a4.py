@@ -75,10 +75,10 @@ class InputFrameListener(sf.FrameListener):
             self.entityMgr.updateSelection()
 
         if self.Keyboard.isKeyDown(OIS.KC_DOWN):
-            self.entityMgr.updateSelectedEntity(1)
+            self.entityMgr.updateSelectedEntity(0)
 
         if self.Keyboard.isKeyDown(OIS.KC_UP):
-            self.entityMgr.updateSelectedEntity(0)
+            self.entityMgr.updateSelectedEntity(1)
 
         if self.Keyboard.isKeyDown(OIS.KC_LEFT):
             self.entityMgr.updateSelectedEntity(2)
@@ -101,8 +101,8 @@ class MovingApplication(sf.Application):
         self.surfaceHeight = 0
         self.entityMgr = EntityMgr(sceneManager)
 
-        self.entityMgr.createEntity(sceneManager, mesh="cube.mesh", vel=ogre.Vector3(0,0,0), pos=ogre.Vector3(0,100,0))
-        self.entityMgr.createEntity(sceneManager,  mesh="cube.mesh", vel=ogre.Vector3(0,0,0), pos=ogre.Vector3(0,200,0))
+        self.entityMgr.createEntity(sceneManager, "sailboat", mesh="sailboat.mesh", vel=ogre.Vector3(0,0,0), pos=ogre.Vector3(0,0,0))
+        self.entityMgr.createEntity(sceneManager, "destroyer", mesh="sleek.mesh", vel=ogre.Vector3(0,0,0), pos=ogre.Vector3(200,0,0))
 
         # self.ogreEntities[0].setMaterialName ('Examples/Rockwall')
 
@@ -115,7 +115,7 @@ class MovingApplication(sf.Application):
         groundNode = sceneManager.getRootSceneNode().createChildSceneNode('GroundPlane')
         groundNode.attachObject(groundPlane)
         groundNode.setPosition(0,self.surfaceHeight,0)
-        groundPlane.setMaterialName ('Examples/Rockwall')
+        groundPlane.setMaterialName ('Ocean2_Cg')
 
         # Setup the first camera node and pitch node and aim it.
         node = sceneManager.getRootSceneNode().createChildSceneNode('CamNode1', (-400, 200, 400))

@@ -1,5 +1,6 @@
 import ogre.renderer.OGRE as ogre
 from physics import Physics
+from math import radians
 
 class EntityMgr:
 	def __init__(self, sceneManager):
@@ -8,8 +9,11 @@ class EntityMgr:
 		self.selectedEntity = 0
 		self.sceneManager = sceneManager
 
-	def createEntity(self, sceneManager, mesh = "", pos = ogre.Vector3(0,0,0), vel = ogre.Vector3(0,0,0), heading = 0, speed = 0, desiredSpeed = 0, desiredHeading = 0, acceleration = ogre.Vector3(0,0,0), turningRate = 0):
-		self.entityList.append(Entity(sceneManager, str(self.uniqueId), mesh, pos, vel, heading, speed, desiredSpeed, desiredHeading, acceleration, turningRate))
+	def createEntity(self, sceneManager, type, mesh = "", pos = ogre.Vector3(0,0,0), vel = ogre.Vector3(0,0,0), heading = 0, speed = 0, desiredSpeed = 0, desiredHeading = 0, acceleration = ogre.Vector3(0,0,0), turningRate = 0):
+		if(type == "sailboat"):
+			self.entityList.append(SailboatEntity(sceneManager, str(self.uniqueId), mesh, pos, vel, heading, speed, desiredSpeed, desiredHeading, turningRate))
+		if(type == 'destroyer'):
+			self.entityList.append(DestroyerEntity(sceneManager, str(self.uniqueId), mesh, pos, vel, heading, speed, desiredSpeed, desiredHeading, turningRate))
 		self.uniqueId += 1
 
 	def updateEntities(self, time):
@@ -18,16 +22,16 @@ class EntityMgr:
 
 	def updateSelectedEntity(self, direction):
 		if(direction == 0):
-			self.entityList[self.selectedEntity].vel += ogre.Vector3(-1,0,0)
+			self.entityList[self.selectedEntity].desiredSpeed -= 1
 
 		elif(direction == 1):
-			self.entityList[self.selectedEntity].vel += ogre.Vector3(1,0,0)
+			self.entityList[self.selectedEntity].desiredSpeed += 1
 
 		elif(direction == 2):
-			self.entityList[self.selectedEntity].vel += ogre.Vector3(0,0,1)
+			self.entityList[self.selectedEntity].desiredHeading -= 1
 
 		elif(direction == 3):
-			self.entityList[self.selectedEntity].vel += ogre.Vector3(0,0,-1)
+			self.entityList[self.selectedEntity].desiredHeading += 1
 
 	def updateSelection(self):
 		self.selectedEntity += 1
@@ -35,7 +39,7 @@ class EntityMgr:
 			self.selectedEntity = 0
 
 class Entity:
-	def __init__(self, sceneManager, name, mesh = "", pos = ogre.Vector3(0,0,0), vel = ogre.Vector3(0,0,0), heading = 0, speed = 0, desiredSpeed = 0, desiredHeading = 0, acceleration = ogre.Vector3(0,0,0), turningRate = 0):
+	def __init__(self, sceneManager, name, mesh = "", pos = ogre.Vector3(0,0,0), vel = ogre.Vector3(0,0,0), heading = 0, speed = 0, desiredSpeed = 0, desiredHeading = 0, turningRate = 0):
 		self.name = name
 		self.mesh = mesh
 		self.pos = pos
@@ -44,7 +48,6 @@ class Entity:
 		self.speed = speed
 		self.desiredSpeed = desiredSpeed
 		self.desiredHeading = desiredHeading
-		self.acceleration = acceleration
 		self.turningRate = turningRate
 		self.sceneManager = sceneManager
 		self.physics = Physics(self)
@@ -53,6 +56,20 @@ class Entity:
 	def tick(self, time):
 		self.physics.tick(time)
 		self.renderable.tick()
+
+class SailboatEntity(Entity):
+	def __init__(self, sceneManager, name, mesh, pos, vel, heading, speed, desiredSpeed, desiredHeading, turningRate):
+		self.maxSpeed = 100.0
+		self.turningRate = 10.0
+		self.acceleration = 3.0
+		Entity.__init__(self, sceneManager, name, mesh, pos, vel, heading, speed, desiredSpeed, desiredHeading, self.turningRate)
+
+class DestroyerEntity(Entity):
+	def __init__(self, sceneManager, name, mesh, pos, vel, heading, speed, desiredSpeed, desiredHeading, turningRate):
+		self.maxSpeed = 150.0
+		self.turningRate = 5.0
+		self.acceleration = 6.0
+		Entity.__init__(self, sceneManager, name, mesh, pos, vel, heading, speed, desiredSpeed, desiredHeading, self.turningRate)
 
 class Renderable:
 	def __init__(self, entity, sceneManager):
@@ -66,4 +83,4 @@ class Renderable:
 
 	def tick(self):
 		self.node.setPosition(self.entity.pos)
-		# self.yaw(self.entity.heading)
+		self.node.setOrientation(ogre.Quaternion(radians(-self.entity.heading), ogre.Vector3(0,1,0)))

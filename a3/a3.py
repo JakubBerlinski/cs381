@@ -140,8 +140,8 @@ class MovingApplication(sf.Application):
         surfaceHeight = 0
         self.entities = []
         self.ogreEntities = []
-        self.entities.append(Entity("cube1", mesh="cube.mesh", vel=ogre.Vector3(0,0,0), pos=ogre.Vector3(0,100,0)))
-        self.entities.append(Entity("cube2", mesh="cube.mesh", vel=ogre.Vector3(0,0,0), pos=ogre.Vector3(0,200,0)))
+        # self.entities.append(Entity("1", mesh="sailboat.mesh", vel=ogre.Vector3(0,0,0), pos=ogre.Vector3(0,100,0)))
+        # self.entities.append(Entity("2", mesh="sailboat.mesh", vel=ogre.Vector3(0,0,0), pos=ogre.Vector3(0,200,0)))
 
         # Setup a mesh entity and attach it to a scene node.
         for i in self.entities:
