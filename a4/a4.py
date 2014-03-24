@@ -21,7 +21,7 @@ class InputFrameListener(sf.FrameListener):
         self.camNode = camera.parentSceneNode.parentSceneNode
         self.sceneManager = sceneManager
         self.rotate = 0.13
-        self.move = 250
+        self.move = 500
         self.entityMgr = entityMgr
         self.nodeNum = 0
         self.moveScale = 0.0
@@ -72,7 +72,8 @@ class InputFrameListener(sf.FrameListener):
 
         # Move the cube using keyboard input.
         if self.Keyboard.isKeyDown(OIS.KC_TAB) and self.toggle < 0:
-            self.entityMgr.updateSelection()
+			self.toggle = 0.3
+			self.entityMgr.updateSelection()
 
         if self.Keyboard.isKeyDown(OIS.KC_DOWN):
             self.entityMgr.updateSelectedEntity(0)
@@ -85,10 +86,14 @@ class InputFrameListener(sf.FrameListener):
 
         if self.Keyboard.isKeyDown(OIS.KC_RIGHT):
             self.entityMgr.updateSelectedEntity(3)
+
+        if self.Keyboard.isKeyDown(OIS.KC_SPACE):
+            self.entityMgr.updateSelectedEntity(4)
  
         # Translate the camera based on time.
         #self.camNode.translate(self.camNode.orientation * transVector * frameEvent.timeSinceLastFrame)
-        self.camera.moveRelative(transVector)
+        # self.camera.moveRelative(transVector)
+        self._moveCamera()
  
         # If the escape key is pressed end the program.
         return not self.Keyboard.isKeyDown(OIS.KC_ESCAPE)
@@ -101,8 +106,14 @@ class MovingApplication(sf.Application):
         self.surfaceHeight = 0
         self.entityMgr = EntityMgr(sceneManager)
 
-        self.entityMgr.createEntity(sceneManager, "sailboat", mesh="sailboat.mesh", vel=ogre.Vector3(0,0,0), pos=ogre.Vector3(0,0,0))
-        self.entityMgr.createEntity(sceneManager, "destroyer", mesh="sleek.mesh", vel=ogre.Vector3(0,0,0), pos=ogre.Vector3(200,0,0))
+        self.entityMgr.createEntity(sceneManager, "sailboat", mesh="sailboat.mesh", vel=ogre.Vector3(0,0,0), pos=ogre.Vector3(0,3,0))
+        self.entityMgr.createEntity(sceneManager, "destroyer", mesh="sleek.mesh", vel=ogre.Vector3(0,0,0), pos=ogre.Vector3(0,3,100))
+        self.entityMgr.createEntity(sceneManager, "speedboat", mesh="5086_Boat.mesh", vel=ogre.Vector3(0,0,0), pos=ogre.Vector3(0,3,200))
+        self.entityMgr.createEntity(sceneManager, "scout", mesh="cigarette.mesh", vel=ogre.Vector3(0,0,0), pos=ogre.Vector3(0,3,300))
+        self.entityMgr.createEntity(sceneManager, "superspeedboat", mesh="boat.mesh", vel=ogre.Vector3(0,0,0), pos=ogre.Vector3(0,3,400))
+        self.entityMgr.createEntity(sceneManager, "alienship", mesh="alienship.mesh", vel=ogre.Vector3(0,0,0), pos=ogre.Vector3(0,3,500))
+        self.entityMgr.createEntity(sceneManager, "aircraftcarrier", mesh="cvn68.mesh", vel=ogre.Vector3(0,0,0), pos=ogre.Vector3(0,3,600))
+        self.entityMgr.createEntity(sceneManager, "gunship", mesh="sleek.mesh", vel=ogre.Vector3(0,0,0), pos=ogre.Vector3(0,3,700))
 
         # self.ogreEntities[0].setMaterialName ('Examples/Rockwall')
 
