@@ -9,8 +9,9 @@ class Entity:
 
     aspectTypes = [Physics, Renderable]
     
-    def __init__(self, id, pos = ogre.Vector3(0,0,0), mesh = 'robot.mesh', vel = ogre.Vector3(0, 0, 0), yaw = 0):
+    def __init__(self, id, gfxMgr, pos = ogre.Vector3(0,0,0), mesh = 'robot.mesh', vel = ogre.Vector3(0, 0, 0), yaw = 0):
         self.id = id
+        self.gfxMgr = gfxMgr
         self.pos = pos
         self.vel = vel
         self.mesh = mesh
@@ -22,12 +23,10 @@ class Entity:
         self.aspects = []
         self.initAspects()
         
-
     def initAspects(self):
         for aspType in self.aspectTypes:
             self.aspects.append(aspType(self))
         
-
     def tick(self, dtime):
         for aspect in self.aspects:
             aspect.tick(dtime)

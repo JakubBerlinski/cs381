@@ -20,8 +20,6 @@ class GameMgr:
         for entType in self.engine.entityMgr.entTypes:
             print "GameMgr Creating", str(entType)
             ent = self.engine.entityMgr.createEnt(entType, pos = ogre.Vector3(x, 0, 0))
-            gfxNode = self.engine.gfxMgr.createGent(ent.uiname + str(i), ent.mesh, ent.pos, ent.heading)
-            ent.node = gfxNode
             print "GameMgr Created: ", ent.uiname, ent.id, ent.node
             x += 300
             i += 1

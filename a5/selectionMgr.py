@@ -1,10 +1,10 @@
 class SelectionMgr:
     def __init__(self, engine):
-        self.engine = engine
-        pass
+		self.engine = engine
+		print "Starting Selection Manager"
 
     def init(self):
-        pass
+		self.selectedEntities = {}
 
     def tick(self, dt):
-        pass
+		pass

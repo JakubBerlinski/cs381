@@ -15,3 +15,7 @@ class Renderable:
         #------------heading----------------------------------
         self.ent.node.resetOrientation()
         self.ent.node.yaw(self.ent.heading)
+
+	def createNode(self):
+        # gfxNode = self.engine.gfxMgr.createGent(ent.uiname + str(i), ent.mesh, ent.pos, ent.heading)
+        # ent.node = gfxNode

@@ -8,8 +8,8 @@ class CameraListener(ogre.FrameListener):
 		self.camNode = camera.parentSceneNode.parentSceneNode
 		self.sceneManager = sceneManager
 		self.engine = engine
-		self.rotate = 0.26
-		self.move = 250
+		self.rotate = 0.50
+		self.move = 400
 
 	def frameStarted(self, evt):
 		self.keyboard.capture()
@@ -60,7 +60,7 @@ class InputMgr:
 	def setupInputSystem(self):
 		windowHandle = 0
 		self.renderWindow = self.engine.gfxMgr.root.getAutoCreatedWindow()
-		windowHandle = self.renderWindow.getCustomAttributeInt("WINDOW")
+		windowHandle = self.renderWindow.getCustomAttributeUnsignedLong("WINDOW")
 		paramList = [("WINDOW", str(windowHandle))]
 		t = [("x11_mouse_grab", "false"), ("x11_mouse_hide", "false")]
 		paramList.extend(t)

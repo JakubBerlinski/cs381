@@ -64,7 +64,6 @@ class GfxMgr:
 
 	def createGroundPlane(self):
 		self.sceneManager.ambientLight = 1, 1, 1
-
 		plane = ogre.Plane((0,1,0), 0)
 		meshManager = ogre.MeshManager.getSingleton()
 		meshManager.createPlane('Ground', 'General', plane, 10000, 10000, 20, 20, True, 1, 5, 5, (0,0,1))
@@ -72,11 +71,28 @@ class GfxMgr:
 		self.sceneManager.getRootSceneNode().createChildSceneNode().attachObject(ent)
 		ent.setMaterialName('OceanCg')
 		ent.castShadows = False
-
 		self.sceneManager.setSkyDome(True, 'Examples/CloudySky', 5, 8)
-
+            
 	def createGent(self, mid, mesh, pos, yaw):
 		e = self.sceneManager.createEntity(mid, mesh)
 		node = self.sceneManager.getRootSceneNode().createChildSceneNode(mid + 'node', pos)
 		node.attachObject(e)
 		return node
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
