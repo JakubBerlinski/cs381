@@ -7,7 +7,7 @@ import utils
 import math
 
 class Physics:
-    def __init__(self, ent):
+    def __init__(self, ent, sceneManager):
         self.ent = ent
         
     def tick(self, dtime):

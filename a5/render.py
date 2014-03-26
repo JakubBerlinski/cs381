@@ -6,16 +6,21 @@ import utils
 import math
 
 class Renderable:
-    def __init__(self, ent):
-        self.ent = ent
-        
-    def tick(self, dtime):
-        #----------position-----------------------------------
-        self.ent.node.setPosition(self.ent.pos)
-        #------------heading----------------------------------
-        self.ent.node.resetOrientation()
-        self.ent.node.yaw(self.ent.heading)
+	def __init__(self, ent, sceneManager):
+		self.ent = ent
+		self.sceneManager = sceneManager
+		self.createNode()
+
+	def tick(self, dtime):
+		#----------position-----------------------------------
+		self.ent.node.setPosition(self.ent.pos)
+		#------------heading----------------------------------
+		self.ent.node.resetOrientation()
+		self.ent.node.yaw(self.ent.heading)
 
 	def createNode(self):
-        # gfxNode = self.engine.gfxMgr.createGent(ent.uiname + str(i), ent.mesh, ent.pos, ent.heading)
-        # ent.node = gfxNode
+		print self.ent.id
+		e = self.sceneManager.createEntity(self.ent.uiname, self.ent.mesh)
+		node = self.sceneManager.getRootSceneNode().createChildSceneNode(self.ent.uiname + 'node', self.ent.pos)
+		node.attachObject(e)
+		self.ent.node = node

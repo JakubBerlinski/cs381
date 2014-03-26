@@ -5,13 +5,11 @@ import ogre.renderer.OGRE as ogre
 from physics import Physics
 from render  import Renderable
 class Entity:
-
-
     aspectTypes = [Physics, Renderable]
     
-    def __init__(self, id, gfxMgr, pos = ogre.Vector3(0,0,0), mesh = 'robot.mesh', vel = ogre.Vector3(0, 0, 0), yaw = 0):
+    def __init__(self, id, sceneManager, pos = ogre.Vector3(0,0,0), mesh = 'robot.mesh', vel = ogre.Vector3(0, 0, 0), yaw = 0):
         self.id = id
-        self.gfxMgr = gfxMgr
+        self.sceneManager = sceneManager
         self.pos = pos
         self.vel = vel
         self.mesh = mesh
@@ -25,7 +23,7 @@ class Entity:
         
     def initAspects(self):
         for aspType in self.aspectTypes:
-            self.aspects.append(aspType(self))
+            self.aspects.append(aspType(self,self.sceneManager))
         
     def tick(self, dtime):
         for aspect in self.aspects:
@@ -37,10 +35,10 @@ class Entity:
 
 
 class CVN68(Entity):
-    def __init__(self, id, pos = ogre.Vector3(0,0,0), vel = ogre.Vector3(0, 0, 0), yaw = 0):
-        Entity.__init__(self, id, pos = pos, vel = vel, yaw = yaw)
-        self.mesh = 'cvn68.mesh'
+    def __init__(self, id, sceneManager, pos = ogre.Vector3(0,0,0), vel = ogre.Vector3(0, 0, 0), yaw = 0):
         self.uiname = 'CVN68'
+        self.mesh = 'cvn68.mesh'
+        Entity.__init__(self, id, sceneManager, pos = pos, vel = vel, yaw = yaw)
         self.acceleration = 2
         self.turningRate  = 0.01
         self.maxSpeed = 10
@@ -51,10 +49,10 @@ class CVN68(Entity):
 
 
 class CIGARETTE(Entity):
-    def __init__(self, id, pos = ogre.Vector3(0,0,0), vel = ogre.Vector3(0, 0, 0), yaw = 0):
-        Entity.__init__(self, id, pos = pos, vel = vel, yaw = yaw)
-        self.mesh = 'cigarette.mesh'
+    def __init__(self, id, sceneManager, pos = ogre.Vector3(0,0,0), vel = ogre.Vector3(0, 0, 0), yaw = 0):
         self.uiname = 'CIGARETTE'
+        self.mesh = 'cigarette.mesh'
+        Entity.__init__(self, id, sceneManager, pos = pos, vel = vel, yaw = yaw)
         self.acceleration  = 6
         self.turningRate   = 0.1
         self.maxSpeed = 40
@@ -64,10 +62,10 @@ class CIGARETTE(Entity):
         self.heading = 0
 
 class MONTEREY(Entity):
-    def __init__(self, id, pos = ogre.Vector3(0,0,0), vel = ogre.Vector3(0, 0, 0), yaw = 0):
-        Entity.__init__(self, id, pos = pos, vel = vel, yaw = yaw)
-        self.mesh = '3699_Monterey_189_92.mesh'
+    def __init__(self, id, sceneManager, pos = ogre.Vector3(0,0,0), vel = ogre.Vector3(0, 0, 0), yaw = 0):
         self.uiname = 'MONTEREY'
+        self.mesh = '3699_Monterey_189_92.mesh'
+        Entity.__init__(self, id, sceneManager, pos = pos, vel = vel, yaw = yaw)
         self.acceleration = 5
         self.turningRate = 0.1
         self.maxSpeed = 35
@@ -77,10 +75,10 @@ class MONTEREY(Entity):
         self.heading = 0
 
 class JETSKI(Entity):
-    def __init__(self, id, pos = ogre.Vector3(0,0,0), vel = ogre.Vector3(0, 0, 0), yaw = 0):
-        Entity.__init__(self, id, pos = pos, vel = vel, yaw = yaw)
-        self.mesh = '4685_Personal_Watercr.mesh'
+    def __init__(self, id, sceneManager, pos = ogre.Vector3(0,0,0), vel = ogre.Vector3(0, 0, 0), yaw = 0):
         self.uiname = 'JETSKI'
+        self.mesh = '4685_Personal_Watercr.mesh'
+        Entity.__init__(self, id, sceneManager, pos = pos, vel = vel, yaw = yaw)
         self.acceleration = 7
         self.turningRate = 0.15
         self.maxSpeed = 20
@@ -90,10 +88,10 @@ class JETSKI(Entity):
         self.heading = 0
 
 class SAILBOAT(Entity):
-    def __init__(self, id, pos = ogre.Vector3(0,0,0), vel = ogre.Vector3(0, 0, 0), yaw = 0):
-        Entity.__init__(self, id, pos = pos, vel = vel, yaw = yaw)
-        self.mesh = 'sailboat.mesh'
+    def __init__(self, id, sceneManager, pos = ogre.Vector3(0,0,0), vel = ogre.Vector3(0, 0, 0), yaw = 0):
         self.uiname = 'SAILBOAT'
+        self.mesh = 'sailboat.mesh'
+        Entity.__init__(self, id, sceneManager, pos = pos, vel = vel, yaw = yaw)
         self.acceleration = 3
         self.turningRate = 0.1
         self.maxSpeed = 10
@@ -103,10 +101,10 @@ class SAILBOAT(Entity):
         self.heading = 0
 
 class SLEEK(Entity):
-    def __init__(self, id, pos = ogre.Vector3(0,0,0), vel = ogre.Vector3(0, 0, 0), yaw = 0):
-        Entity.__init__(self, id, pos = pos, vel = vel, yaw = yaw)
-        self.mesh = 'sleek.mesh'
+    def __init__(self, id, sceneManager, pos = ogre.Vector3(0,0,0), vel = ogre.Vector3(0, 0, 0), yaw = 0):
         self.uiname = 'SLEEK'
+        self.mesh = 'sleek.mesh'
+        Entity.__init__(self, id, sceneManager, pos = pos, vel = vel, yaw = yaw)
         self.acceleration = 4
         self.turningRate = 0.02
         self.maxSpeed = 30
@@ -116,10 +114,10 @@ class SLEEK(Entity):
         self.heading = 0
 
 class BOAT(Entity):
-    def __init__(self, id, pos = ogre.Vector3(0,0,0), vel = ogre.Vector3(0, 0, 0), yaw = 0):
-        Entity.__init__(self, id, pos = pos, vel = vel, yaw = yaw)
-        self.mesh = 'boat.mesh'
+    def __init__(self, id, sceneManager, pos = ogre.Vector3(0,0,0), vel = ogre.Vector3(0, 0, 0), yaw = 0):
         self.uiname = 'BOAT'
+        self.mesh = 'boat.mesh'
+        Entity.__init__(self, id, sceneManager, pos = pos, vel = vel, yaw = yaw)
         self.acceleration = 5
         self.turningRate = 0.1
         self.maxSpeed = 30
@@ -129,10 +127,10 @@ class BOAT(Entity):
         self.heading = 0
 
 class DDG51(Entity):
-    def __init__(self, id, pos = ogre.Vector3(0,0,0), vel = ogre.Vector3(0, 0, 0), yaw = 0):
-        Entity.__init__(self, id, pos = pos, vel = vel, yaw = yaw)
-        self.mesh = 'ddg51.mesh'
+    def __init__(self, id, sceneManager, pos = ogre.Vector3(0,0,0), vel = ogre.Vector3(0, 0, 0), yaw = 0):
         self.uiname = 'DDG51'
+        self.mesh = 'ddg51.mesh'
+        Entity.__init__(self, id, sceneManager, pos = pos, vel = vel, yaw = yaw)
         self.acceleration = 5
         self.turningRate = 0.02
         self.maxSpeed = 32
@@ -142,10 +140,10 @@ class DDG51(Entity):
         self.heading = 0
 
 class ALIENSHIP(Entity):
-    def __init__(self, id, pos = ogre.Vector3(0,0,0), vel = ogre.Vector3(0, 0, 0), yaw = 0):
-        Entity.__init__(self, id, pos = pos, vel = vel, yaw = yaw)
-        self.mesh = 'alienship.mesh'
+    def __init__(self, id, sceneManager, pos = ogre.Vector3(0,0,0), vel = ogre.Vector3(0, 0, 0), yaw = 0):
         self.uiname = 'ALIEN'
+        self.mesh = 'alienship.mesh'
+        Entity.__init__(self, id, sceneManager, pos = pos, vel = vel, yaw = yaw)
         self.acceleration  = 10
         self.turningRate   = 0.3
         self.maxSpeed = 60
@@ -155,10 +153,10 @@ class ALIENSHIP(Entity):
         self.heading = 0
 
 class BOAT2(Entity):
-    def __init__(self, id, pos = ogre.Vector3(0,0,0), vel = ogre.Vector3(0, 0, 0), yaw = 0):
-        Entity.__init__(self, id, pos = pos, vel = vel, yaw = yaw)
-        self.mesh = '5086_Boat.mesh'
+    def __init__(self, id, sceneManager, pos = ogre.Vector3(0,0,0), vel = ogre.Vector3(0, 0, 0), yaw = 0):
         self.uiname = 'BOAT2'
+        self.mesh = '5086_Boat.mesh'
+        Entity.__init__(self, id, sceneManager, pos = pos, vel = vel, yaw = yaw)
         self.acceleration = 5
         self.turningRate = 0.025
         self.maxSpeed = 30

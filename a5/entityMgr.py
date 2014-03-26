@@ -23,7 +23,7 @@ class EntMgr:
 
 
     def createEnt(self, entType, pos = ogre.Vector3(0,0,0), yaw = 0):
-        ent = entType(self.nEnts, self.engine.gfxMgr, pos = pos, yaw = yaw)
+        ent = entType(self.nEnts, self.engine.gfxMgr.sceneManager, pos = pos, yaw = yaw)
 
         self.ents[self.nEnts] = ent;
         self.selectedEnt = ent
