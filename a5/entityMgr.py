@@ -21,7 +21,6 @@ class EntMgr:
     def stop(self):
         pass
 
-
     def createEnt(self, entType, pos = ogre.Vector3(0,0,0), yaw = 0):
         ent = entType(self.nEnts, self.engine.gfxMgr.sceneManager, pos = pos, yaw = yaw)
 
@@ -31,18 +30,6 @@ class EntMgr:
 
         self.nEnts = self.nEnts + 1
         return ent
-
-    def selectNextEnt(self):
-        if self.selectedEntIndex >= self.nEnts - 1:
-            self.selectedEntIndex = 0
-        else:
-            self.selectedEntIndex += 1
-        self.selectedEnt = self.ents[self.selectedEntIndex]
-        print "EntMgr selected: ", str(self.selectedEnt)
-        return self.selectedEnt
-
-    def getSelected(self):
-        return self.selectedEnt
 
 
 

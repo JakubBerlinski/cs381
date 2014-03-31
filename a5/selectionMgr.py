@@ -1,14 +1,14 @@
 class SelectionMgr:
-    def __init__(self, engine):
+	def __init__(self, engine):
 		self.engine = engine
 		self.selectedEntIndex = 0
-        self.selectedEnt = []
+		self.selectedEnt = []
 		print "Starting Selection Manager"
 
-    def init(self):
+	def init(self):
 		pass
-
-    def tick(self, dt):
+		
+	def tick(self, dt):
 		pass
 		
 	def selectNextEnt(self):
@@ -16,8 +16,14 @@ class SelectionMgr:
 			self.selectedEntIndex = 0
 		else:
 			self.selectedEntIndex += 1
-		selectedEnt[:] = []
+		self.selectedEnt[:] = []
 		self.selectedEnt.append(self.engine.entityMgr.ents[self.selectedEntIndex])
+		return self.selectedEnt
 		
-	def deselectEnt(self):
-		pass
+	def appendEnt(self):
+		if self.selectedEntIndex >= self.engine.entityMgr.nEnts - 1:
+			self.selectedEntIndex = 0
+		else:
+			self.selectedEntIndex += 1
+		self.selectedEnt.append(self.engine.entityMgr.ents[self.selectedEntIndex])
+		return self.selectedEnt
