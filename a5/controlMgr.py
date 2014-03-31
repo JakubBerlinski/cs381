@@ -22,7 +22,8 @@ class ControlMgr:
 		if self.toggle >= 0:
 			self.toggle -= dt
 			
-		selectedEnt = self.engine.entityMgr.selectedEnt
+		# selectedEnt = self.engine.entityMgr.selectedEnt
+		selectedEnt = self.engine.selectionMgr.selectedEnt
 		if self.toggle < 0 and self.keyboard.isKeyDown(OIS.KC_UP):
 			self.toggle = 0.25
 			selectedEnt.desiredSpeed = utils.clamp(selectedEnt.desiredSpeed + selectedEnt.deltaSpeed, 0, selectedEnt.maxSpeed)
@@ -47,8 +48,24 @@ class ControlMgr:
 			
 		if self.toggle < 0 and self.keyboard.isKeyDown(OIS.KC_TAB):
 			self.toggle = 0.25
-			selectedEnt.node.showBoundingBox(False)
+			for ent in selectedEnt:
+				ent.node.showBoundingBox(False)
 			selectedEnt = self.engine.entityMgr.selectNextEnt()
 			print "Selected: ", str(selectedEnt)
 			selectedEnt.node.showBoundingBox(True)
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
 

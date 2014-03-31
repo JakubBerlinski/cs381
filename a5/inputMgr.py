@@ -33,7 +33,7 @@ class InputMgr:
 	def manageInput(self, dt):
 		self.keyboard.capture()
 		self.mouse.capture()
-		print self.mouse.getPosition()
+		# print self.mouse.getPosition()
 		transVector = ogre.Vector3(0,0,0)
 		
 		if self.keyboard.isKeyDown(OIS.KC_W):
@@ -60,3 +60,20 @@ class InputMgr:
 			self.engine.keepRunning = False
 
 		self.camNode.translate(self.camNode.orientation * transVector * dt)
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
