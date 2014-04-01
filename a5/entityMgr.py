@@ -9,6 +9,7 @@ class EntMgr:
         
     def init(self):
         self.ents = {}
+        self.entNodeId = 0
         self.nEnts = 0
         self.selectedEntIndex = 0
         self.selectedEnt = None
@@ -22,7 +23,8 @@ class EntMgr:
         pass
 
     def createEnt(self, entType, pos = ogre.Vector3(0,0,0), yaw = 0):
-        ent = entType(self.nEnts, self.engine.gfxMgr.sceneManager, pos = pos, yaw = yaw)
+        ent = entType(self.nEnts, self.engine.gfxMgr.sceneManager, self.entNodeId, pos = pos, yaw = yaw)
+        self.entNodeId += 1
 
         self.ents[self.nEnts] = ent;
         self.selectedEnt = ent

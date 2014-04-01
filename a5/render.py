@@ -6,8 +6,9 @@ import utils
 import math
 
 class Renderable:
-	def __init__(self, ent, sceneManager):
+	def __init__(self, ent, sceneManager, uid):
 		self.ent = ent
+		self.uid = uid
 		self.sceneManager = sceneManager
 		self.createNode()
 
@@ -20,7 +21,7 @@ class Renderable:
 
 	def createNode(self):
 		print self.ent.id
-		e = self.sceneManager.createEntity(self.ent.uiname, self.ent.mesh)
-		node = self.sceneManager.getRootSceneNode().createChildSceneNode(self.ent.uiname + 'node', self.ent.pos)
+		e = self.sceneManager.createEntity(str(self.uid), self.ent.mesh)
+		node = self.sceneManager.getRootSceneNode().createChildSceneNode(str(self.uid), self.ent.pos)
 		node.attachObject(e)
 		self.ent.node = node

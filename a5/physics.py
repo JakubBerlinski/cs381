@@ -7,8 +7,9 @@ import utils
 import math
 
 class Physics:
-    def __init__(self, ent, sceneManager):
+    def __init__(self, ent, sceneManager, uid):
         self.ent = ent
+        self.uid = uid
         
     def tick(self, dtime):
         #----------position-----------------------------------

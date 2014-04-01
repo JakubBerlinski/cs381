@@ -48,15 +48,15 @@ class Engine(object):
         self.keepRunning = False
 
     def run(self):
-        import time
+        import time, sys
         import ogre.renderer.OGRE as ogre
         weu = ogre.WindowEventUtilities() # Needed for linux/mac
         weu.messagePump()                 # Needed for linux/mac
 
-        self.oldTime = time.time()        
+        self.oldTime = time.clock() if sys.platform == 'win32' else time.time()        
         self.runTime = 0
         while (self.keepRunning):
-            now = time.time() # Change to time.clock() for windows
+            now = time.clock() if sys.platform == 'win32' else time.time() # Change to time.clock() for windows
             dtime = now - self.oldTime
             self.oldTime = now
 

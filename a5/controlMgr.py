@@ -66,33 +66,3 @@ class ControlMgr:
 			selectedEnt = self.engine.selectionMgr.appendEnt()
 			for ent in selectedEnt:
 				ent.node.showBoundingBox(True)
-				
-		if self.toggle < 0 and mouseState.buttonDown(OIS.MB_Left):
-			mouseRay = self.camera.getCameraToViewportRay(mouseState.X.abs / float(mouseState.width), mouseState.Y.abs / float(mouseState.height))
-			self.raySceneQuery.setRay(mouseRay)
-			self.raySceneQuery.setSortByDistance(True)
-			result = self.raySceneQuery.execute()
-			if len(result) > 0:
-				for item in result:
-					item = result[0]
-					ent = item.movable.getParentSceneNode()
-					print dir(item.movable)#ent.name
-					ent.showBoundingBox(True)
-			
-
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-
