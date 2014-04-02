@@ -84,7 +84,7 @@ class InputMgr:
 					ent = item.movable
 					if ent.getName() != "Camera" and ent.getName() != "GroundEntity": 
 						print ent.getName()
-						self.engine.selectionMgr.addClickedEnt(ent.getName())
+						self.engine.selectionMgr.selectClickedEnt(ent.getName())
 						ent.getParentSceneNode().showBoundingBox(True)
 
 		self.camNode.translate(self.camNode.orientation * transVector * dt)

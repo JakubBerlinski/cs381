@@ -28,10 +28,9 @@ class SelectionMgr:
 		self.selectedEnt.append(self.engine.entityMgr.ents[self.selectedEntIndex])
 		return self.selectedEnt
 
-	def addClickedEnt(self, id):
+	def selectClickedEnt(self, id):
 		for i, ent in self.engine.entityMgr.ents.iteritems():
 			ent.node.showBoundingBox(False)
 		self.selectedEnt[:] = []
 		self.selectedEnt.append(self.engine.entityMgr.ents[int(id)])
-
-
+		self.selectedEntIndex = int(id)

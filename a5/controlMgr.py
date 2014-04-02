@@ -24,7 +24,6 @@ class ControlMgr:
 		self.keyboard.capture()
 		self.mouse.capture()
 		mouseState = self.mouse.getMouseState()
-		# print self.mouse.getMouseState().X.abs, self.mouse.getMouseState().Y.abs
 		if self.toggle >= 0:
 			self.toggle -= dt
 
