@@ -18,6 +18,12 @@ class InputMgr:
 
 	def tick(self, dt):
 		self.manageInput(dt)
+	
+	def stop(self):
+		self.inputManager.destroyInputObjectKeyboard(self.keyboard)
+		self.inputManager.destroyInputObjectMouse(self.mouse)
+		OIS.InputManager.destroyInputSystem(self.inputManager)
+		self.inputManager = None
 
 	def setupInputSystem(self):
 		windowHandle = 0
