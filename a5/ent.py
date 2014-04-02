@@ -1,6 +1,3 @@
-# Entity class to hold information about entities for 38Engine
-# Sushil Louis
-
 import ogre.renderer.OGRE as ogre
 from physics import Physics
 from render  import Renderable
@@ -42,7 +39,7 @@ class CVN68(Entity):
         self.mesh = 'cvn68.mesh'
         Entity.__init__(self, id, sceneManager, nid, mesh = self.mesh, pos = pos, vel = vel, yaw = yaw)
         self.acceleration = 2
-        self.turningRate  = 0.01
+        self.turningRate  = 0.01 * 100
         self.maxSpeed = 10
         self.desiredSpeed = 0
         self.desiredHeading = 0
@@ -56,7 +53,7 @@ class CIGARETTE(Entity):
         self.mesh = 'cigarette.mesh'
         Entity.__init__(self, id, sceneManager, nid, mesh = self.mesh, pos = pos, vel = vel, yaw = yaw)
         self.acceleration  = 6
-        self.turningRate   = 0.1
+        self.turningRate   = 0.1 * 100
         self.maxSpeed = 40
         self.desiredSpeed = 0
         self.desiredHeading = 0
@@ -69,7 +66,7 @@ class MONTEREY(Entity):
         self.mesh = '3699_Monterey_189_92.mesh'
         Entity.__init__(self, id, sceneManager, nid, mesh = self.mesh, pos = pos, vel = vel, yaw = yaw)
         self.acceleration = 5
-        self.turningRate = 0.1
+        self.turningRate = 0.1 * 100
         self.maxSpeed = 35
         self.desiredSpeed = 0
         self.desiredHeading = 0
@@ -82,7 +79,7 @@ class JETSKI(Entity):
         self.mesh = '4685_Personal_Watercr.mesh'
         Entity.__init__(self, id, sceneManager, nid, mesh = self.mesh, pos = pos, vel = vel, yaw = yaw)
         self.acceleration = 7
-        self.turningRate = 0.15
+        self.turningRate = 0.15 * 100
         self.maxSpeed = 20
         self.desiredSpeed = 0
         self.desiredHeading = 0
@@ -95,7 +92,7 @@ class SAILBOAT(Entity):
         self.mesh = 'sailboat.mesh'
         Entity.__init__(self, id, sceneManager, nid, mesh = self.mesh, pos = pos, vel = vel, yaw = yaw)
         self.acceleration = 3
-        self.turningRate = 0.1
+        self.turningRate = 0.1 * 100
         self.maxSpeed = 10
         self.desiredSpeed = 0
         self.desiredHeading = 0
@@ -108,7 +105,7 @@ class SLEEK(Entity):
         self.mesh = 'sleek.mesh'
         Entity.__init__(self, id, sceneManager, nid, mesh = self.mesh, pos = pos, vel = vel, yaw = yaw)
         self.acceleration = 4
-        self.turningRate = 0.02
+        self.turningRate = 0.02 * 100
         self.maxSpeed = 30
         self.desiredSpeed = 0
         self.desiredHeading = 0
@@ -121,7 +118,7 @@ class BOAT(Entity):
         self.mesh = 'boat.mesh'
         Entity.__init__(self, id, sceneManager, nid, mesh = self.mesh, pos = pos, vel = vel, yaw = yaw)
         self.acceleration = 5
-        self.turningRate = 0.1
+        self.turningRate = 0.1 * 100
         self.maxSpeed = 30
         self.desiredSpeed = 0
         self.desiredHeading = 0
@@ -134,7 +131,7 @@ class DDG51(Entity):
         self.mesh = 'ddg51.mesh'
         Entity.__init__(self, id, sceneManager, nid, mesh=self.mesh, pos = pos, vel = vel, yaw = yaw)
         self.acceleration = 5
-        self.turningRate = 0.02
+        self.turningRate = 0.02 * 100
         self.maxSpeed = 32
         self.desiredSpeed = 0
         self.desiredHeading = 0
@@ -146,8 +143,8 @@ class ALIENSHIP(Entity):
         self.uiname = 'ALIEN'
         self.mesh = 'alienship.mesh'
         Entity.__init__(self, id, sceneManager, nid, mesh = self.mesh, pos = pos, vel = vel, yaw = yaw)
-        self.acceleration  = 10
-        self.turningRate   = 0.3
+        self.acceleration  = 100
+        self.turningRate   = 0.3 * 400
         self.maxSpeed = 60
         self.desiredSpeed = 0
         self.desiredHeading = 0
@@ -160,7 +157,7 @@ class BOAT2(Entity):
         self.mesh = '5086_Boat.mesh'
         Entity.__init__(self, id, sceneManager, nid, mesh = self.mesh, pos = pos, vel = vel, yaw = yaw)
         self.acceleration = 5
-        self.turningRate = 0.025
+        self.turningRate = 0.025 * 100
         self.maxSpeed = 30
         self.desiredSpeed = 0
         self.desiredHeading = 0

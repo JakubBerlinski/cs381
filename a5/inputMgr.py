@@ -6,7 +6,7 @@ class InputMgr:
 	def __init__(self, engine):
 		self.engine = engine
 		self.sceneManager = self.engine.gfxMgr.sceneManager
-		self.camNode = self.engine.gfxMgr.camera.parentSceneNode#.parentSceneNode
+		self.camNode = self.engine.gfxMgr.camera.parentSceneNode
 		self.rotate = 0.50
 		self.move = 400
 		self.camera = self.engine.gfxMgr.camera

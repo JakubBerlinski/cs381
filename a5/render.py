@@ -1,9 +1,5 @@
-# Simple ORIENTED Physics for 38Engine
-# vel is rate of change of pos
-# Sushil Louis
-
-import utils
-import math
+from math import radians
+import ogre.renderer.OGRE as ogre
 
 class Renderable:
 	def __init__(self, ent, sceneManager, uid):
@@ -13,11 +9,8 @@ class Renderable:
 		self.createNode()
 
 	def tick(self, dtime):
-		#----------position-----------------------------------
 		self.ent.node.setPosition(self.ent.pos)
-		#------------heading----------------------------------
-		self.ent.node.resetOrientation()
-		self.ent.node.yaw(self.ent.heading)
+		self.ent.node.setOrientation(ogre.Quaternion(radians(-self.ent.heading), ogre.Vector3(0,1,0)))
 
 	def createNode(self):
 		print self.ent.id

@@ -1,6 +1,5 @@
 import ogre.io.OIS as OIS
 import ogre.renderer.OGRE as ogre
-import utils
 
 class ControlMgr:
 	def __init__(self, engine):
@@ -32,24 +31,22 @@ class ControlMgr:
 		if self.toggle < 0 and self.keyboard.isKeyDown(OIS.KC_UP):
 			self.toggle = 0.25
 			for ent in selectedEnt:
-				ent.desiredSpeed = utils.clamp(ent.desiredSpeed + ent.deltaSpeed, 0, ent.maxSpeed)
+				ent.desiredSpeed += 1
 			
 		if self.toggle < 0 and self.keyboard.isKeyDown(OIS.KC_DOWN):
 			self.toggle = 0.25
 			for ent in selectedEnt:
-				ent.desiredSpeed = utils.clamp(ent.desiredSpeed - ent.deltaSpeed, 0, ent.maxSpeed)
+				ent.desiredSpeed -= 1
 			
 		if self.toggle < 0 and self.keyboard.isKeyDown(OIS.KC_LEFT):
 			self.toggle = 0.25
 			for ent in selectedEnt:
-				ent.desiredHeading += ent.deltaYaw
-				ent.desiredHeading = utils.fixAngle(ent.desiredHeading)
+				ent.desiredHeading -= 1
 			
 		if self.toggle < 0 and self.keyboard.isKeyDown(OIS.KC_RIGHT):
 			self.toggle = 0.25
 			for ent in selectedEnt:
-				ent.desiredHeading -= ent.deltaYaw
-				ent.desiredHeading = utils.fixAngle(ent.desiredHeading)
+				ent.desiredHeading += 1
 			
 		if self.toggle < 0 and self.keyboard.isKeyDown(OIS.KC_TAB) and not self.keyboard.isKeyDown(OIS.KC_LSHIFT):
 			self.toggle = 0.25
@@ -65,3 +62,10 @@ class ControlMgr:
 			selectedEnt = self.engine.selectionMgr.appendEnt()
 			for ent in selectedEnt:
 				ent.node.showBoundingBox(True)
+				
+		if self.toggle < 0 and self.keyboard.isKeyDown(OIS.KC_SPACE):
+			self.toggle = 0.25
+			for ent in selectedEnt:
+				ent.vel = ogre.Vector3(0,0,0)
+				ent.speed = 0
+				ent.desiredSpeed = 0

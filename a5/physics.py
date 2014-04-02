@@ -1,31 +1,33 @@
-# Simple ORIENTED Physics for 38Engine
-# vel is rate of change of pos
-# Sushil Louis
-
-from vector import MyVector
-import utils
-import math
+from math import cos, sin, radians
+import ogre.renderer.OGRE as ogre
 
 class Physics:
     def __init__(self, ent, sceneManager, uid):
         self.ent = ent
+        self.entity = ent
         self.uid = uid
         
-    def tick(self, dtime):
-        #----------position-----------------------------------
-        timeScaledAcceleration = self.ent.acceleration * dtime
-        self.ent.speed += utils.clamp( self.ent.desiredSpeed - self.ent.speed, -timeScaledAcceleration, timeScaledAcceleration)
+    def tick(self, time):
+		PI = 3.1415
+		orientation = ogre.Vector3(cos(radians(self.entity.heading)), 0, sin(radians(self.entity.heading)))
 
-        self.ent.vel.x = math.cos(-self.ent.heading) * self.ent.speed
-        self.ent.vel.z = math.sin(-self.ent.heading) * self.ent.speed
-        self.ent.vel.y = 0
-        
-        self.ent.pos = self.ent.pos + (self.ent.vel * dtime)
+		if(self.entity.speed <= self.entity.maxSpeed and self.entity.speed >= -self.entity.maxSpeed):
+			if(self.entity.speed < self.entity.desiredSpeed):
+				self.entity.speed += self.entity.acceleration * time
+			elif(self.entity.speed > self.entity.desiredSpeed):
+				self.entity.speed -= self.entity.acceleration * time
 
-        #------------heading----------------------------------
+		if(self.entity.heading != self.entity.desiredHeading):
+			if(self.entity.heading > self.entity.desiredHeading):
+				self.entity.heading -= self.entity.turningRate * time
+			elif(self.entity.heading < self.entity.desiredHeading):
+				self.entity.heading += self.entity.turningRate * time
 
-        timeScaledRotation = self.ent.turningRate * dtime
-        angleDiff = utils.diffAngle(self.ent.desiredHeading, self.ent.heading)
-        dheading = utils.clamp(angleDiff, -timeScaledRotation, timeScaledRotation)
 
-        self.ent.heading += dheading
+		self.entity.vel.x = self.entity.speed * orientation.x
+		self.entity.vel.z = self.entity.speed * orientation.z
+
+		print self.entity.speed, self.entity.heading
+
+		self.entity.pos = self.entity.pos + self.entity.vel * time
+

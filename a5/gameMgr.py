@@ -16,13 +16,11 @@ class GameMgr:
 
     def game1(self):
         x = 0
-        i = 0
         for entType in self.engine.entityMgr.entTypes:
             print "GameMgr Creating", str(entType)
             ent = self.engine.entityMgr.createEnt(entType, pos = ogre.Vector3(x, 0, 0))
             print "GameMgr Created: ", ent.uiname, ent.id, ent.node
             x += 300
-            i += 1
 
     def tick(self, dt):
         pass
