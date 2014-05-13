@@ -1,0 +1,14 @@
+material piller
+{
+    technique
+    {
+        pass
+        {
+            texture_unit
+            {
+                texture Metal.jpg
+                filtering trilinear
+            }
+        }
+    }
+}

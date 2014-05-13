@@ -1,0 +1,15 @@
+material Snow
+ {
+    technique
+    {
+       pass
+        {
+          texture_unit
+          {
+            texture snow_1024.jpg
+            scale 1.0 1.0
+            // this means that the texture will be tiled 10 times (1/10 = 0.1)
+          }
+       }   
+    }
+ }

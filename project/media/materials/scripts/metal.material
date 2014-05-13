@@ -1,0 +1,15 @@
+material Panel/Metal
+ {
+    technique
+    {
+       pass
+        {
+          texture_unit
+          {
+            texture Metal.jpg
+            scale 1.0 1.0
+            // this means that the texture will be tiled 10 times (1/10 = 0.1)
+          }
+       }   
+    }
+ }
